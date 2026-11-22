@@ -13,11 +13,11 @@
 const JOGOS = [
   {
     id: "jogo1",
-    nome: "Nome do Jogo 1",
-    url: "COLE_AQUI_O_LINK_DO_DROPBOX_COM_dl=1",
+    nome: "ESTRELA SOMBRIA: A GUARDIÃ DO CRISTAL DO SOL",
+    url: "https://www.dropbox.com/scl/fi/xhz5to3me16n97zy0sp1s/ESTRELA-SOMBRIA-A-GUARDI-DO-CRISTAL-DO-SOL.html?rlkey=9yntf7tioqcc0jpgw2ejh25tu&st=1xwg68q8&dl=1",
     versao: "1.0",
-    icone: "🐍",
-    descricao: "Descrição curta do jogo."
+    icone: "🚀",
+    descricao: "descricao: "Pilote a nave da Capitã Cleo, enfrente chefões únicos, desvie de meteoros e recupere o Cristal do Sol. Tiro automático, só setas e OK.",."
   },
   {
     id: "jogo2",
