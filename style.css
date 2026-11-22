@@ -1,0 +1,105 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; min-height: 100%; background: #0e1a2b; color: #f2f5fa; font-family: Arial, Helvetica, sans-serif; }
+body { overflow-x: hidden; }
+
+#splash {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: #0e1a2b no-repeat center center; background-size: contain;
+  z-index: 10; transition: opacity .5s;
+}
+#splash.out { opacity: 0; }
+
+.hidden { display: none; }
+
+header { padding: 32px 48px 8px; }
+h1 { font-size: 40px; font-weight: bold; letter-spacing: .5px; }
+header p { margin-top: 8px; font-size: 18px; color: #8fa3bf; }
+
+#grid, #grid2 { display: flex; flex-wrap: wrap; padding: 24px 40px 60px; }
+
+.card {
+  width: 190px; margin: 14px; padding: 16px 12px 14px;
+  background: #182741; border-radius: 18px; text-align: center;
+  border: 4px solid transparent; outline: none; cursor: pointer;
+  -webkit-transition: -webkit-transform .15s, border-color .15s, background .15s;
+  transition: transform .15s, border-color .15s, background .15s;
+}
+.card:focus, .card:hover {
+  border-color: #ffc83d; background: #22365a;
+  -webkit-transform: scale(1.08); transform: scale(1.08);
+}
+.icon {
+  width: 120px; height: 120px; margin: 0 auto 12px; border-radius: 26px;
+  background: #2b4170; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 56px; font-weight: bold; color: #ffc83d;
+}
+.icon img { width: 100%; height: 100%; display: block; object-fit: cover; }
+.name { font-size: 20px; line-height: 1.2; word-wrap: break-word; }
+
+#toast {
+  position: fixed; left: 50%; bottom: 36px; padding: 14px 28px;
+  background: #ffc83d; color: #0e1a2b; font-size: 20px; font-weight: bold;
+  border-radius: 12px; opacity: 0; pointer-events: none;
+  -webkit-transform: translateX(-50%); transform: translateX(-50%);
+  transition: opacity .25s;
+}
+#toast.show { opacity: 1; }
+
+@media (max-width: 700px) {
+  header { padding: 20px 20px 4px; }
+  h1 { font-size: 28px; }
+  #grid, #grid2 { padding: 12px 8px 40px; justify-content: center; }
+  .card { width: 150px; margin: 8px; }
+  .icon { width: 96px; height: 96px; font-size: 44px; }
+}
+
+/* ===== cabeçalho com botão ===== */
+header { display: flex; align-items: flex-start; justify-content: space-between; }
+.pill {
+  margin-top: 6px; padding: 14px 34px; font-size: 22px; font-weight: bold;
+  color: #f2f5fa; background: #182741; border: 4px solid #2b4170; border-radius: 40px;
+  cursor: pointer; outline: none; font-family: Arial, Helvetica, sans-serif;
+}
+.pill:focus, .pill:hover { border-color: #ffc83d; background: #22365a; }
+
+/* ===== tela de senha ===== */
+#lock, #exit {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 20;
+  background: rgba(0,0,0,.78); display: flex; align-items: center; justify-content: center;
+}
+#lock.hidden, #apps.hidden, #exit.hidden { display: none; }
+.lockbox {
+  width: 360px; max-width: 94%; padding: 28px 24px 22px; background: #121212;
+  border-radius: 24px; text-align: center; border: 1px solid #262626;
+}
+.lockbox h2 { font-size: 28px; color: #cfcfcf; }
+.lockbox p { margin-top: 10px; font-size: 17px; color: #777; min-height: 22px; }
+.lockbox p.err { color: #ff6b6b; }
+#dots { margin: 18px 0 22px; }
+#dots i {
+  display: inline-block; width: 20px; height: 20px; margin: 0 9px;
+  border: 3px solid #888; border-radius: 50%;
+}
+#dots i.on { background: #ffc83d; border-color: #ffc83d; }
+#keys { display: flex; flex-wrap: wrap; margin: 0 -6px; }
+.key {
+  width: 33.33%; padding: 6px;
+}
+.key div {
+  height: 74px; line-height: 70px; background: #1b1b1b; border: 3px solid #2a2a2a;
+  border-radius: 14px; font-size: 30px; font-weight: bold; color: #bbb; cursor: pointer;
+}
+.key.small div { font-size: 16px; }
+.key:focus { outline: none; }
+.key:focus div, .key:hover div { border-color: #ffc83d; background: #2a2a2a; color: #fff; }
+#bar { height: 6px; margin-top: 16px; background: #222; border-radius: 3px; overflow: hidden; }
+#barfill { height: 100%; width: 100%; background: #ffc83d; }
+
+/* ===== toque no celular ===== */
+html, body, .card, .pill, .key { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+.key, .card, .pill { -webkit-user-select: none; user-select: none; }
+
+/* ===== confirmação de saída ===== */
+.exitbtns { margin-top: 22px; }
+.exitbtns .pill { margin: 0 8px; padding: 12px 30px; }
