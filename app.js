@@ -45,7 +45,7 @@ const JOGOS_GB = [
     icone: "👾",
     descricao: "Game Boy."
   },
-    {
+  {
     id: "gb2",
     nome: "Pokémon Blue",
     url: "https://www.dropbox.com/scl/fi/5gytsugdaotd1m91yihis/Pok-mon-Blue.gb?rlkey=deso7ltllz6bg1t5lwhlo671m&st=nqioyu1g&dl=1",
@@ -53,7 +53,7 @@ const JOGOS_GB = [
     icone: "👾",
     descricao: "Game Boy."
   },
-    {
+  {
     id: "gb3",
     nome: "Pokémon Yellow",
     url: "https://www.dropbox.com/scl/fi/klu4q9vzb83ds1b4vnj3z/Pok-mon-Yellow.gb?rlkey=69zo6hec7e790xcltsjqn09eo&st=q2uu6db4&dl=1",
@@ -68,22 +68,22 @@ const JOGOS_GB = [
     versao: "1.0",
     icone: "🕹️",
     descricao: "Game Boy."
-  }
-    {
+  },
+  {
     id: "gb5",
     nome: "Pokemon Gold",
     url: "https://www.dropbox.com/scl/fi/brys2l8b78au1nmsy091b/Pokemon-Gold.gbc?rlkey=vqpd9fcbjv2a9nf44fskf53rc&st=5n4vdf68&dl=1",
     versao: "1.0",
     icone: "🕹️",
-    descricao: "Game Boy Color.."
-  }
-      {
+    descricao: "Game Boy Color."
+  },
+  {
     id: "gb6",
     nome: "Pokémon Crystal",
     url: "https://www.dropbox.com/scl/fi/swnx61fv7ji3r752x8l2x/Pok-mon-Crystal.GBC?rlkey=0a8l38cndg1nzkpzwkpigbcf3&st=dl0cnllc&dl=1",
     versao: "1.0",
     icone: "🕹️",
-    descricao: "Game Boy Color.."
+    descricao: "Game Boy Color."
   }
 ];
 
