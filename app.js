@@ -13,16 +13,16 @@
 const JOGOS = [
   {
     id: "jogo1",
-    nome: "Nome do Jogo 1",
-    url: "COLE_AQUI_O_LINK_DO_DROPBOX_COM_dl=1",
+    nome: "ESTRELA SOMBRIA A GUARDIÃ DO CRISTAL DO SOL",
+    url: "https://www.dropbox.com/scl/fi/xhz5to3me16n97zy0sp1s/ESTRELA-SOMBRIA-A-GUARDI-DO-CRISTAL-DO-SOL.html?rlkey=9yntf7tioqcc0jpgw2ejh25tu&st=2kgud0ww&dl=1",
     versao: "1.0",
     icone: "🐍",
     descricao: "Descrição curta do jogo."
   },
   {
     id: "jogo2",
-    nome: "Nome do Jogo 2",
-    url: "COLE_AQUI_O_LINK_DO_DROPBOX_COM_dl=1",
+    nome: "Road Fury",
+    url: "https://www.dropbox.com/scl/fi/yban0wonfg4gf2dipli6n/Road-Fury.html?rlkey=vs6vy4byvc507bq7psaaxh9ac&st=lswiz3lh&dl=1",
     versao: "1.0",
     icone: "🚀",
     descricao: "Descrição curta do jogo."
