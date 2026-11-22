@@ -17,17 +17,16 @@ const JOGOS = [
     url: "https://www.dropbox.com/scl/fi/xhz5to3me16n97zy0sp1s/ESTRELA-SOMBRIA-A-GUARDI-DO-CRISTAL-DO-SOL.html?rlkey=9yntf7tioqcc0jpgw2ejh25tu&st=hb3b7m1i&dl=1",
     versao: "1.0",
     icone: "🚀",
-    descricao: "descricao: "Pilote a nave da Capitã Cleo, enfrente chefões únicos, desvie de meteoros e recupere o Cristal do Sol. Tiro automático, só setas e OK."
+    descricao: "Pilote a nave da Capitã Cleo, enfrente chefões únicos, desvie de meteoros e recupere o Cristal do Sol. Tiro automático, só setas e OK."
   },
-    {
+  {
     id: "jogo2",
     nome: "Road Fury",
     url: "https://www.dropbox.com/scl/fi/xhz5to3me16n97zy0sp1s/ESTRELA-SOMBRIA-A-GUARDI-DO-CRISTAL-DO-SOL.html?rlkey=9yntf7tioqcc0jpgw2ejh25tu&st=1xwg68q8&dl=1",
     versao: "1.0",
     icone: "🏍️",
-    descricao: "descricao: "Corrida de moto de ação para TV box: desvie, pegue nitro, atire mísseis e chegue em 1º entre 12 pilotos."
+    descricao: "Corrida de moto de ação para TV box: desvie, pegue nitro, atire mísseis e chegue em 1º entre 12 pilotos."
   },
-  
   {
     id: "jogo3",
     nome: "Nome do Jogo 2",
