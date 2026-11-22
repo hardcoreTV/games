@@ -63,14 +63,6 @@ const JOGOS_GB = [
   },
   {
     id: "gb4",
-    nome: "Nome do Jogo Game Boy 2",
-    url: "COLE_AQUI_O_LINK_DO_DROPBOX_COM_dl=1",
-    versao: "1.0",
-    icone: "🕹️",
-    descricao: "Game Boy."
-  },
-  {
-    id: "gb5",
     nome: "Pokemon Gold",
     url: "https://www.dropbox.com/scl/fi/brys2l8b78au1nmsy091b/Pokemon-Gold.gbc?rlkey=vqpd9fcbjv2a9nf44fskf53rc&st=5n4vdf68&dl=1",
     versao: "1.0",
@@ -78,7 +70,7 @@ const JOGOS_GB = [
     descricao: "Game Boy Color."
   },
   {
-    id: "gb6",
+    id: "gb5",
     nome: "Pokémon Crystal",
     url: "https://www.dropbox.com/scl/fi/swnx61fv7ji3r752x8l2x/Pok-mon-Crystal.GBC?rlkey=0a8l38cndg1nzkpzwkpigbcf3&st=dl0cnllc&dl=1",
     versao: "1.0",
