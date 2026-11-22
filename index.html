@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>APP Store</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="splash"></div>
+
+<div id="store" class="hidden">
+  <header>
+    <div>
+      <h1 id="title">APP Store</h1>
+      <p>Navegue com as setas e aperte OK para baixar</p>
+    </div>
+    <button id="btnApps" class="pill" type="button">Apps</button>
+  </header>
+  <main id="grid"></main>
+</div>
+
+<div id="apps" class="hidden">
+  <header>
+    <div>
+      <h1>Apps</h1>
+      <p>Navegue com as setas e aperte OK para baixar</p>
+    </div>
+    <button id="btnBack" class="pill" type="button">Voltar</button>
+  </header>
+  <main id="grid2"></main>
+</div>
+
+<div id="lock" class="hidden">
+  <div class="lockbox">
+    <h2>Configuração</h2>
+    <p id="lockMsg">Digite a senha para entrar</p>
+    <div id="dots"><i></i><i></i><i></i><i></i></div>
+    <div id="keys"></div>
+    <div id="bar"><div id="barfill"></div></div>
+  </div>
+</div>
+
+<div id="exit" class="hidden">
+  <div class="lockbox">
+    <h2>Sair da loja?</h2>
+    <p>Aperte voltar de novo para sair</p>
+    <div class="exitbtns">
+      <button id="btnStay" class="pill" type="button">Ficar</button>
+      <button id="btnExit" class="pill" type="button">Sair</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+<script src="app.js"></script>
+</body>
+</html>
