@@ -13,27 +13,45 @@
 const JOGOS = [
   {
     id: "jogo1",
-    nome: "ESTRELA SOMBRIA: A GUARDIÃ DO CRISTAL DO SOL",
-    url: "https://www.dropbox.com/scl/fi/xhz5to3me16n97zy0sp1s/ESTRELA-SOMBRIA-A-GUARDI-DO-CRISTAL-DO-SOL.html?rlkey=9yntf7tioqcc0jpgw2ejh25tu&st=hb3b7m1i&dl=1",
+    nome: "Nome do Jogo 1",
+    url: "COLE_AQUI_O_LINK_DO_DROPBOX_COM_dl=1",
     versao: "1.0",
-    icone: "🚀",
-    descricao: "Pilote a nave da Capitã Cleo, enfrente chefões únicos, desvie de meteoros e recupere o Cristal do Sol. Tiro automático, só setas e OK."
+    icone: "🐍",
+    descricao: "Descrição curta do jogo."
   },
   {
     id: "jogo2",
-    nome: "Road Fury",
-    url: "https://www.dropbox.com/scl/fi/yban0wonfg4gf2dipli6n/Road-Fury.html?rlkey=vs6vy4byvc507bq7psaaxh9ac&st=meh9rlak&dl=1",
-    versao: "1.0",
-    icone: "🏍️",
-    descricao: "Corrida de moto de ação para TV box: desvie, pegue nitro, atire mísseis e chegue em 1º entre 12 pilotos."
-  },
-  {
-    id: "jogo3",
     nome: "Nome do Jogo 2",
     url: "COLE_AQUI_O_LINK_DO_DROPBOX_COM_dl=1",
     versao: "1.0",
     icone: "🚀",
     descricao: "Descrição curta do jogo."
+  }
+];
+
+/* =====================================================================
+   JOGOS DE GAME BOY (Game Boy e Game Boy Color)
+   Funciona igual aos jogos acima, mas o link do Dropbox é da ROM
+   (arquivo .gb ou .gbc, ou um .zip com a ROM dentro). O app baixa e
+   já abre no emulador. Para adicionar, copie um bloco e troque os dados.
+   Controle: OK = A | 1 e 2 = B | 3 = Start | 4 = Select
+   ===================================================================== */
+const JOGOS_GB = [
+  {
+    id: "gb1",
+    nome: "Nome do Jogo Game Boy 1",
+    url: "COLE_AQUI_O_LINK_DO_DROPBOX_COM_dl=1",
+    versao: "1.0",
+    icone: "👾",
+    descricao: "Game Boy Color."
+  },
+  {
+    id: "gb2",
+    nome: "Nome do Jogo Game Boy 2",
+    url: "COLE_AQUI_O_LINK_DO_DROPBOX_COM_dl=1",
+    versao: "1.0",
+    icone: "🕹️",
+    descricao: "Game Boy."
   }
 ];
 
@@ -43,29 +61,37 @@ const noApp = typeof window.GamesTV !== "undefined";
 let ultimoId = null;
 
 const grade = document.getElementById("grade");
+const gradeGB = document.getElementById("gradeGB");
+const TODOS = JOGOS.concat(JOGOS_GB);
 
-JOGOS.forEach(function (j) {
-  const b = document.createElement("button");
-  b.className = "card";
-  b.setAttribute("data-nav", "");
-  b.setAttribute("data-id", j.id);
+function criarCards(lista, destino) {
+  lista.forEach(function (j) {
+    const b = document.createElement("button");
+    b.className = "card";
+    b.setAttribute("data-nav", "");
+    b.setAttribute("data-id", j.id);
 
-  const ic = document.createElement("span");
-  ic.className = "icone";
-  ic.textContent = j.icone || "🎮";
-  const nm = document.createElement("span");
-  nm.className = "nome";
-  nm.textContent = j.nome;
-  const ds = document.createElement("span");
-  ds.className = "desc";
-  ds.textContent = j.descricao || "";
-  const bd = document.createElement("span");
-  bd.className = "badge";
+    const ic = document.createElement("span");
+    ic.className = "icone";
+    ic.textContent = j.icone || "🎮";
+    const nm = document.createElement("span");
+    nm.className = "nome";
+    nm.textContent = j.nome;
+    const ds = document.createElement("span");
+    ds.className = "desc";
+    ds.textContent = j.descricao || "";
+    const bd = document.createElement("span");
+    bd.className = "badge";
 
-  b.append(ic, nm, ds, bd);
-  b.addEventListener("click", function () { jogar(j); });
-  grade.appendChild(b);
-});
+    b.append(ic, nm, ds, bd);
+    b.addEventListener("click", function () { jogar(j); });
+    destino.appendChild(b);
+  });
+}
+
+criarCards(JOGOS, grade);
+criarCards(JOGOS_GB, gradeGB);
+if (JOGOS_GB.length === 0) document.getElementById("secaoGB").style.display = "none";
 
 document.getElementById("btnSair").addEventListener("click", function () {
   if (noApp) window.GamesTV.sair();
@@ -84,8 +110,8 @@ function baixados() {
 
 function atualizarBadges() {
   const lista = noApp ? baixados() : {};
-  JOGOS.forEach(function (j) {
-    const card = grade.querySelector('[data-id="' + j.id + '"]');
+  TODOS.forEach(function (j) {
+    const card = document.querySelector('[data-id="' + j.id + '"]');
     const bd = card.querySelector(".badge");
     if (lista[j.id] === undefined) {
       bd.textContent = "⬇ Baixar";
@@ -105,7 +131,7 @@ window.onJogoBaixado = function () { atualizarBadges(); };
 window.onJogoApagado = function () { atualizarBadges(); };
 window.onVoltouDosJogos = function () {
   atualizarBadges();
-  const el = ultimoId && grade.querySelector('[data-id="' + ultimoId + '"]');
+  const el = ultimoId && document.querySelector('[data-id="' + ultimoId + '"]');
   (el || document.querySelector("[data-nav]")).focus();
 };
 

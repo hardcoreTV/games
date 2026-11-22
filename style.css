@@ -40,6 +40,13 @@ main { padding: 24px 48px; }
   gap: 28px;
 }
 
+.titulo-secao {
+  margin: 44px 0 20px;
+  font-size: 30px;
+  letter-spacing: 1px;
+  color: var(--ciano);
+}
+
 /* cartão do jogo */
 .card {
   display: flex;
