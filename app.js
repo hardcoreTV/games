@@ -22,7 +22,7 @@ const JOGOS = [
   {
     id: "jogo2",
     nome: "Road Fury",
-    url: "https://www.dropbox.com/scl/fi/xhz5to3me16n97zy0sp1s/ESTRELA-SOMBRIA-A-GUARDI-DO-CRISTAL-DO-SOL.html?rlkey=9yntf7tioqcc0jpgw2ejh25tu&st=1xwg68q8&dl=1",
+    url: "https://www.dropbox.com/scl/fi/yban0wonfg4gf2dipli6n/Road-Fury.html?rlkey=vs6vy4byvc507bq7psaaxh9ac&st=meh9rlak&dl=1",
     versao: "1.0",
     icone: "🏍️",
     descricao: "Corrida de moto de ação para TV box: desvie, pegue nitro, atire mísseis e chegue em 1º entre 12 pilotos."
