@@ -39,14 +39,30 @@ const JOGOS = [
 const JOGOS_GB = [
   {
     id: "gb1",
-    nome: "Nome do Jogo Game Boy 1",
-    url: "COLE_AQUI_O_LINK_DO_DROPBOX_COM_dl=1",
+    nome: "Pokémon Red",
+    url: "https://www.dropbox.com/scl/fi/twae2vb69qimspvfil0b2/Pok-mon-Red.gb?rlkey=hbazel0irl8j8o1pmxlrl5hen&st=ij53vvkm&dl=1",
+    versao: "1.0",
+    icone: "👾",
+    descricao: "Game Boy Color."
+  },
+    {
+    id: "gb2",
+    nome: "Pokémon Blue",
+    url: "https://www.dropbox.com/scl/fi/5gytsugdaotd1m91yihis/Pok-mon-Blue.gb?rlkey=deso7ltllz6bg1t5lwhlo671m&st=nqioyu1g&dl=1",
+    versao: "1.0",
+    icone: "👾",
+    descricao: "Game Boy Color."
+  },
+    {
+    id: "gb3",
+    nome: "Pokémon Yellow",
+    url: "https://www.dropbox.com/scl/fi/klu4q9vzb83ds1b4vnj3z/Pok-mon-Yellow.gb?rlkey=69zo6hec7e790xcltsjqn09eo&st=q2uu6db4&dl=1",
     versao: "1.0",
     icone: "👾",
     descricao: "Game Boy Color."
   },
   {
-    id: "gb2",
+    id: "gb4",
     nome: "Nome do Jogo Game Boy 2",
     url: "COLE_AQUI_O_LINK_DO_DROPBOX_COM_dl=1",
     versao: "1.0",
