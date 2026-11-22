@@ -16,7 +16,7 @@ const JOGOS = [
     nome: "ESTRELA SOMBRIA A GUARDIÃ DO CRISTAL DO SOL",
     url: "https://www.dropbox.com/scl/fi/xhz5to3me16n97zy0sp1s/ESTRELA-SOMBRIA-A-GUARDI-DO-CRISTAL-DO-SOL.html?rlkey=9yntf7tioqcc0jpgw2ejh25tu&st=2kgud0ww&dl=1",
     versao: "1.0",
-    icone: "🐍",
+    icone: "🚀",
     descricao: "Descrição curta do jogo."
   },
   {
@@ -24,7 +24,7 @@ const JOGOS = [
     nome: "Road Fury",
     url: "https://www.dropbox.com/scl/fi/yban0wonfg4gf2dipli6n/Road-Fury.html?rlkey=vs6vy4byvc507bq7psaaxh9ac&st=lswiz3lh&dl=1",
     versao: "1.0",
-    icone: "🚀",
+    icone: "🏍️",
     descricao: "Descrição curta do jogo."
   }
 ];
