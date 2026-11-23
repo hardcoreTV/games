@@ -117,13 +117,16 @@ footer { padding: 8px 48px 48px; display: flex; justify-content: center; }
 
 .info { text-align: center; color: var(--cinza); font-size: 14px; padding: 8px 0 24px; opacity: .7; }
 
-.modal { position: fixed; inset: 0; background: rgba(11,13,20,.9); display: flex;
-         align-items: center; justify-content: center; z-index: 50; }
+.modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(11,13,20,.92);
+         display: flex; align-items: center; justify-content: center; z-index: 50; }
 .modal[hidden] { display: none; }
-.modal-box { width: 560px; max-width: 90%; background: var(--card); border: 2px solid var(--borda);
-             border-radius: 20px; padding: 36px; display: flex; flex-direction: column; gap: 16px; }
-.modal-box h2 { font-size: 26px; }
-.modal-box p { color: var(--cinza); font-size: 18px; margin-bottom: 8px; }
-.mbtn { font: inherit; color: var(--texto); background: #1b2038; border: 2px solid var(--borda);
-        border-radius: 14px; padding: 16px 20px; cursor: pointer; }
-.mbtn:focus { outline: none; border-color: var(--ciano); box-shadow: 0 0 0 4px rgba(0,229,255,.3); }
+.modal-box { width: 70%; max-width: 960px; background: var(--card); border: 3px solid var(--borda);
+             border-radius: 28px; padding: 56px 64px; text-align: center; }
+.modal-box h2 { font-size: 40px; line-height: 1.2; margin-bottom: 10px; }
+.contagem { color: var(--ciano); font-size: 24px; min-height: 32px; margin-bottom: 28px; }
+.mbtn { display: block; width: 100%; font: inherit; font-size: 34px; font-weight: 700; color: var(--texto);
+        background: #1b2038; border: 3px solid var(--borda); border-radius: 20px;
+        padding: 30px 20px; margin-top: 18px; cursor: pointer; }
+.mbtn.mjogar { background: #3a2a8f; }
+.mbtn:focus { outline: none; border-color: var(--ciano); box-shadow: 0 0 0 6px rgba(0,229,255,.35); }
+.mdica { color: var(--cinza); font-size: 20px; margin-top: 26px; }

@@ -116,9 +116,7 @@ function criarCards(lista, destino) {
     bd.className = "badge";
 
     b.append(ic, nm, ds, bd);
-    b.addEventListener("click", function () { jogar(j); });
-    // Mouse/toque: clique com o botão direito ou segurar também abre o menu
-    b.addEventListener("contextmenu", function (e) { e.preventDefault(); abrirMenuJogo(j); });
+    b.addEventListener("click", function () { abrirMenuJogo(j); });
     destino.appendChild(b);
   });
 }
@@ -201,77 +199,77 @@ function mover(dir) {
 
 const TECLAS = { 37: "ArrowLeft", 38: "ArrowUp", 39: "ArrowRight", 40: "ArrowDown" };
 
-/* ---------- OK: toque curto joga, segurar abre o menu "Limpar" ---------- */
-
-const TEMPO_LONGO = 700;   // milissegundos segurando o OK
-let tLongo = null, foiLongo = false, cardPressionado = null;
-
-function ehOK(e) { return e.key === "Enter" || e.keyCode === 13 || e.keyCode === 23; }
+/* ---------- teclas ---------- */
 
 document.addEventListener("keydown", function (e) {
   const dir = (e.key && e.key.indexOf("Arrow") === 0) ? e.key : TECLAS[e.keyCode];
   if (dir) { e.preventDefault(); mover(dir); return; }
 
-  if (ehOK(e)) {
-    const a = document.activeElement;
-    if (!a || !a.hasAttribute) return;
+  if (e.key === "Escape" || e.keyCode === 27) { if (fecharModal()) e.preventDefault(); return; }
 
-    if (modalAberto()) {            // dentro do menu: OK age direto
-      if (a.hasAttribute("data-modal")) { e.preventDefault(); if (!e.repeat) a.click(); }
-      return;
-    }
-    if (a.hasAttribute("data-nav")) {
+  // OK / Enter do controle
+  if (e.key === "Enter" || e.keyCode === 13 || e.keyCode === 23) {
+    const a = document.activeElement;
+    const atributo = modalAberto() ? "data-modal" : "data-nav";
+    if (a && a.hasAttribute && a.hasAttribute(atributo)) {
       e.preventDefault();
-      if (e.repeat) return;
-      foiLongo = false;
-      cardPressionado = a;
-      clearTimeout(tLongo);
-      if (a.hasAttribute("data-id")) {   // só os cards de jogo têm menu longo
-        tLongo = setTimeout(function () {
-          foiLongo = true;
-          const j = TODOS.filter(function (x) { return x.id === a.getAttribute("data-id"); })[0];
-          if (j) abrirMenuJogo(j);
-        }, TEMPO_LONGO);
-      }
+      if (!e.repeat) a.click();
     }
   }
 });
 
-document.addEventListener("keyup", function (e) {
-  if (!ehOK(e)) return;
-  clearTimeout(tLongo);
-  if (modalAberto()) return;
-  const a = cardPressionado;
-  cardPressionado = null;
-  if (!a) return;
-  e.preventDefault();
-  if (foiLongo) { foiLongo = false; return; }   // já abriu o menu: não joga
-  a.click();                                     // toque curto: joga/baixa
-});
+/* ---------- janela do jogo: Jogar agora / Limpar jogo ---------- */
 
-/* ---------- menu "Limpar jogo" ---------- */
+const TEMPO_AUTO = 10;   // segundos até entrar no jogo sozinho
+let jogoDoMenu = null, focoAntes = null, tContagem = null, restante = 0;
 
-let jogoDoMenu = null, focoAntes = null;
 const modal = document.getElementById("modal");
+const btnJogar = document.getElementById("modalJogar");
+const btnLimpar = document.getElementById("modalLimpar");
+const txtContagem = document.getElementById("modalContagem");
+const txtDica = document.getElementById("modalDica");
 
 function modalAberto() { return !modal.hidden; }
+
+function pararContagem() {
+  if (tContagem) clearInterval(tContagem);
+  tContagem = null;
+  txtContagem.textContent = "";
+}
+
+function mostrarContagem() {
+  txtContagem.textContent = "Entrando no jogo em " + restante + " segundos...";
+}
+
+function iniciarContagem() {
+  pararContagem();
+  restante = TEMPO_AUTO;
+  mostrarContagem();
+  tContagem = setInterval(function () {
+    restante--;
+    if (restante <= 0) { pararContagem(); btnJogar.click(); }
+    else mostrarContagem();
+  }, 1000);
+}
 
 function abrirMenuJogo(j) {
   const lista = noApp ? baixados() : {};
   const tem = lista[j.id] !== undefined;
+  const velho = tem && (j.versao || "") !== lista[j.id];
   jogoDoMenu = j;
   focoAntes = document.activeElement;
   document.getElementById("modalTitulo").textContent = j.nome;
-  document.getElementById("modalTexto").textContent = tem
-    ? "Apaga o jogo baixado. Depois é só clicar no jogo de novo para baixar a versão nova."
-    : "Este jogo ainda não está baixado, não há nada para limpar.";
-  document.getElementById("modalLimpar").style.display = tem ? "" : "none";
+  btnJogar.textContent = !tem ? "BAIXAR E JOGAR" : (velho ? "ATUALIZAR E JOGAR" : "JOGAR AGORA");
+  btnLimpar.style.display = tem ? "" : "none";
+  txtDica.style.display = tem ? "" : "none";
   modal.hidden = false;
-  (tem ? document.getElementById("modalLimpar") : document.getElementById("modalCancelar")).focus();
+  btnJogar.focus();
+  iniciarContagem();
 }
 
 function fecharModal() {
   if (modal.hidden) return false;
+  pararContagem();
   modal.hidden = true;
   jogoDoMenu = null;
   if (focoAntes && focoAntes.focus) focoAntes.focus();
@@ -279,11 +277,23 @@ function fecharModal() {
 }
 window.fecharModal = fecharModal;   // o botão Voltar do app chama isto
 
-document.getElementById("modalCancelar").addEventListener("click", fecharModal);
-document.getElementById("modalLimpar").addEventListener("click", function () {
+// Foco no "Jogar" liga a contagem; foco no "Limpar" desliga (a pessoa está escolhendo)
+btnJogar.addEventListener("focus", function () { if (modalAberto()) iniciarContagem(); });
+btnLimpar.addEventListener("focus", pararContagem);
+
+btnJogar.addEventListener("click", function () {
   const j = jogoDoMenu;
   fecharModal();
-  if (j && noApp) { window.GamesTV.apagar(j.id); aviso("Jogo limpo. Clique nele para baixar de novo."); }
+  if (j) jogar(j);
+});
+
+btnLimpar.addEventListener("click", function () {
+  const j = jogoDoMenu;
+  fecharModal();
+  if (j && noApp) {
+    window.GamesTV.apagar(j.id);
+    aviso("Jogo limpo. Clique nele de novo para baixar a versão nova.");
+  }
 });
 
 let tAviso;
