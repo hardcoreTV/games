@@ -117,6 +117,8 @@ function criarCards(lista, destino) {
 
     b.append(ic, nm, ds, bd);
     b.addEventListener("click", function () { jogar(j); });
+    // Mouse/toque: clique com o botão direito ou segurar também abre o menu
+    b.addEventListener("contextmenu", function (e) { e.preventDefault(); abrirMenuJogo(j); });
     destino.appendChild(b);
   });
 }
@@ -170,7 +172,8 @@ window.onVoltouDosJogos = function () {
 /* ---------- navegação pelo controle remoto ---------- */
 
 function mover(dir) {
-  const els = Array.prototype.slice.call(document.querySelectorAll("[data-nav]"));
+  const els = Array.prototype.slice.call(
+    document.querySelectorAll(modalAberto() ? "[data-modal]" : "[data-nav]"));
   const atual = document.activeElement;
   if (els.indexOf(atual) < 0) { els[0].focus(); return; }
 
@@ -198,18 +201,89 @@ function mover(dir) {
 
 const TECLAS = { 37: "ArrowLeft", 38: "ArrowUp", 39: "ArrowRight", 40: "ArrowDown" };
 
+/* ---------- OK: toque curto joga, segurar abre o menu "Limpar" ---------- */
+
+const TEMPO_LONGO = 700;   // milissegundos segurando o OK
+let tLongo = null, foiLongo = false, cardPressionado = null;
+
+function ehOK(e) { return e.key === "Enter" || e.keyCode === 13 || e.keyCode === 23; }
+
 document.addEventListener("keydown", function (e) {
   const dir = (e.key && e.key.indexOf("Arrow") === 0) ? e.key : TECLAS[e.keyCode];
   if (dir) { e.preventDefault(); mover(dir); return; }
 
-  // OK / Enter do controle
-  if (e.key === "Enter" || e.keyCode === 13 || e.keyCode === 23) {
+  if (ehOK(e)) {
     const a = document.activeElement;
-    if (a && a.hasAttribute && a.hasAttribute("data-nav")) {
+    if (!a || !a.hasAttribute) return;
+
+    if (modalAberto()) {            // dentro do menu: OK age direto
+      if (a.hasAttribute("data-modal")) { e.preventDefault(); if (!e.repeat) a.click(); }
+      return;
+    }
+    if (a.hasAttribute("data-nav")) {
       e.preventDefault();
-      if (!e.repeat) a.click();
+      if (e.repeat) return;
+      foiLongo = false;
+      cardPressionado = a;
+      clearTimeout(tLongo);
+      if (a.hasAttribute("data-id")) {   // só os cards de jogo têm menu longo
+        tLongo = setTimeout(function () {
+          foiLongo = true;
+          const j = TODOS.filter(function (x) { return x.id === a.getAttribute("data-id"); })[0];
+          if (j) abrirMenuJogo(j);
+        }, TEMPO_LONGO);
+      }
     }
   }
+});
+
+document.addEventListener("keyup", function (e) {
+  if (!ehOK(e)) return;
+  clearTimeout(tLongo);
+  if (modalAberto()) return;
+  const a = cardPressionado;
+  cardPressionado = null;
+  if (!a) return;
+  e.preventDefault();
+  if (foiLongo) { foiLongo = false; return; }   // já abriu o menu: não joga
+  a.click();                                     // toque curto: joga/baixa
+});
+
+/* ---------- menu "Limpar jogo" ---------- */
+
+let jogoDoMenu = null, focoAntes = null;
+const modal = document.getElementById("modal");
+
+function modalAberto() { return !modal.hidden; }
+
+function abrirMenuJogo(j) {
+  const lista = noApp ? baixados() : {};
+  const tem = lista[j.id] !== undefined;
+  jogoDoMenu = j;
+  focoAntes = document.activeElement;
+  document.getElementById("modalTitulo").textContent = j.nome;
+  document.getElementById("modalTexto").textContent = tem
+    ? "Apaga o jogo baixado. Depois é só clicar no jogo de novo para baixar a versão nova."
+    : "Este jogo ainda não está baixado, não há nada para limpar.";
+  document.getElementById("modalLimpar").style.display = tem ? "" : "none";
+  modal.hidden = false;
+  (tem ? document.getElementById("modalLimpar") : document.getElementById("modalCancelar")).focus();
+}
+
+function fecharModal() {
+  if (modal.hidden) return false;
+  modal.hidden = true;
+  jogoDoMenu = null;
+  if (focoAntes && focoAntes.focus) focoAntes.focus();
+  return true;
+}
+window.fecharModal = fecharModal;   // o botão Voltar do app chama isto
+
+document.getElementById("modalCancelar").addEventListener("click", fecharModal);
+document.getElementById("modalLimpar").addEventListener("click", function () {
+  const j = jogoDoMenu;
+  fecharModal();
+  if (j && noApp) { window.GamesTV.apagar(j.id); aviso("Jogo limpo. Clique nele para baixar de novo."); }
 });
 
 let tAviso;
@@ -223,3 +297,4 @@ function aviso(txt) {
 
 atualizarBadges();
 document.querySelector("[data-nav]").focus();
+try { if (noApp && window.GamesTV.info) document.getElementById("info").textContent = window.GamesTV.info(); } catch (e) {}

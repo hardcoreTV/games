@@ -114,3 +114,16 @@ footer { padding: 8px 48px 48px; display: flex; justify-content: center; }
   transition: opacity .25s;
 }
 .aviso.show { opacity: 1; }
+
+.info { text-align: center; color: var(--cinza); font-size: 14px; padding: 8px 0 24px; opacity: .7; }
+
+.modal { position: fixed; inset: 0; background: rgba(11,13,20,.9); display: flex;
+         align-items: center; justify-content: center; z-index: 50; }
+.modal[hidden] { display: none; }
+.modal-box { width: 560px; max-width: 90%; background: var(--card); border: 2px solid var(--borda);
+             border-radius: 20px; padding: 36px; display: flex; flex-direction: column; gap: 16px; }
+.modal-box h2 { font-size: 26px; }
+.modal-box p { color: var(--cinza); font-size: 18px; margin-bottom: 8px; }
+.mbtn { font: inherit; color: var(--texto); background: #1b2038; border: 2px solid var(--borda);
+        border-radius: 14px; padding: 16px 20px; cursor: pointer; }
+.mbtn:focus { outline: none; border-color: var(--ciano); box-shadow: 0 0 0 4px rgba(0,229,255,.3); }
