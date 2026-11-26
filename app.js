@@ -34,7 +34,16 @@ const JOGOS = [
     versao: "1.0",
     icone: "🏎️",
     descricao: "Descrição curta do jogo."
+  },
+    {
+    id: "jogo3",
+    nome: "suzuquinha",
+    url: "https://www.dropbox.com/scl/fi/2c4yeooxtpv15bd400thb/suzuquinha.html?rlkey=w7ezcwnjeyzjb3sxr5ee3cq78&st=tzgww7fe&dl=1",
+    versao: "1.0",
+    icone: "🏎️",
+    descricao: "Descrição curta do jogo."
   }
+  
 ];
 
 /* =====================================================================
