@@ -42,8 +42,15 @@ const JOGOS = [
     versao: "1.1",
     icone: "🏍️",
     descricao: "Descrição curta do jogo."
-  }
-  
+  },
+  {
+  id: "jogo5",
+  nome: "Nebula Noir",
+  url: "https://www.dropbox.com/scl/fi/euibjwkcmiueofb6ui3iu/Nebula-Noir.html?rlkey=bu0f5d63560taeicm6giiv5eh&st=ycgcvn47&dl=1",
+  versao: "1.0",
+  icone: "🛸",
+  descricao: "30 fases, 30 chefes."
+}
 ];
 
 /* =====================================================================
